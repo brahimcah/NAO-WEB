@@ -3,3 +3,4 @@
     $output = shell_exec($command);
     echo $output;
 ?>
+<meta http-equiv="refresh" content="1;url=./" />

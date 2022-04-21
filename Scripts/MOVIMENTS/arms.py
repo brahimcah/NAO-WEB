@@ -2,13 +2,16 @@
 # -*- encoding: UTF-8 -*-
 
 """Example: Whole Body Motion - Left or Right Arm position control"""
-
+from naoqi import ALProxy
 import qi
 import argparse
 import sys
 import motion
 import time
 
+fitxer = open('C:\\xampp\\htdocs\\nao\\data\\ip.txt')
+l = fitxer.readline()
+ip = l.encode('ascii','replsce')
 
 def main(session, chainName):
     """
@@ -79,11 +82,12 @@ def main(session, chainName):
 
     # Go to rest position
     motion_service.rest()
-
+tts = ALProxy("ALTextToSpeech", ip , 9559)
+tts.say("Empezamoe los movimientos")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ip", type=str, default="172.16.252.98",
+    parser.add_argument("--ip", type=str, default=ip,
                         help="Robot IP address. On robot or Local Naoqi: use '127.0.0.1'.")
     parser.add_argument("--port", type=int, default=9559,
                         help="Naoqi port number")
@@ -99,3 +103,5 @@ if __name__ == "__main__":
                "Please check your script arguments. Run with -h option for help.")
         sys.exit(1)
     main(session, args.chain)
+
+    
